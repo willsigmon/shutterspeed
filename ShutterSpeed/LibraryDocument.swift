@@ -13,7 +13,15 @@ final class LibraryManager {
     var showNewLibraryDialog = false
     var showOpenLibraryDialog = false
     var showImportDialog = false
+    var showExportDialog = false
     var recentLibraries: [URL] = []
+
+    // View state
+    var viewMode: ViewMode = .grid
+    var showInspector = true
+    var showFilters = false
+    var gridSize: Double = 150
+    var sortOrder: SortOrder = .captureDate
 
     init() {
         loadRecentLibraries()

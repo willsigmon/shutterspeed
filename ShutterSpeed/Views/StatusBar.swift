@@ -95,7 +95,7 @@ struct StatusBar: View {
                 Text("f/\(String(format: "%.1f", aperture))")
             }
             if let shutter = metadata.shutterSpeed {
-                Text(formatShutterSpeed(shutter))
+                Text(shutter)  // Already formatted as string
             }
             if let iso = metadata.iso {
                 Text("ISO \(iso)")
@@ -103,15 +103,6 @@ struct StatusBar: View {
             if let focal = metadata.focalLength {
                 Text("\(Int(focal))mm")
             }
-        }
-    }
-
-    private func formatShutterSpeed(_ speed: Double) -> String {
-        if speed >= 1 {
-            return "\(Int(speed))s"
-        } else {
-            let denominator = Int(round(1 / speed))
-            return "1/\(denominator)"
         }
     }
 

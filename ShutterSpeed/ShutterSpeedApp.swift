@@ -10,6 +10,7 @@ struct ShutterSpeedApp: App {
                 .environment(libraryManager)
         }
         .commands {
+            // Core file commands
             CommandGroup(replacing: .newItem) {
                 Button("New Library...") {
                     libraryManager.showNewLibraryDialog = true
@@ -28,48 +29,20 @@ struct ShutterSpeedApp: App {
                 }
                 .keyboardShortcut("i", modifiers: [.command, .shift])
                 .disabled(libraryManager.currentLibrary == nil)
+
+                Button("Export Selected...") {
+                    libraryManager.showExportDialog = true
+                }
+                .keyboardShortcut("e", modifiers: [.command, .shift])
+                .disabled(libraryManager.currentLibrary == nil)
             }
+
+            // Full application menu commands
+            AppMenuCommands()
         }
 
         Settings {
             SettingsView()
         }
-    }
-}
-
-struct SettingsView: View {
-    var body: some View {
-        TabView {
-            GeneralSettingsView()
-                .tabItem {
-                    Label("General", systemImage: "gear")
-                }
-
-            LibrarySettingsView()
-                .tabItem {
-                    Label("Library", systemImage: "photo.on.rectangle")
-                }
-        }
-        .frame(width: 450, height: 300)
-    }
-}
-
-struct GeneralSettingsView: View {
-    var body: some View {
-        Form {
-            Text("General settings coming soon")
-                .foregroundStyle(.secondary)
-        }
-        .padding()
-    }
-}
-
-struct LibrarySettingsView: View {
-    var body: some View {
-        Form {
-            Text("Library settings coming soon")
-                .foregroundStyle(.secondary)
-        }
-        .padding()
     }
 }

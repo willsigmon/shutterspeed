@@ -5,6 +5,7 @@ struct PhotoGrid: View {
     @Binding var selectedIDs: Set<UUID>
     let thumbnailProvider: ThumbnailProvider?
     let gridSize: Double
+    var onDoubleClick: ((PhotoImage) -> Void)? = nil
 
     @State private var hoveredID: UUID?
 
@@ -28,6 +29,9 @@ struct PhotoGrid: View {
                     }
                     .onDisappear {
                         thumbnailProvider?.cancelLoading(for: image.id)
+                    }
+                    .onTapGesture(count: 2) {
+                        onDoubleClick?(image)
                     }
                     .onTapGesture {
                         handleTap(image: image)

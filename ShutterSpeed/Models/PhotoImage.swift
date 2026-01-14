@@ -27,6 +27,7 @@ struct PhotoImage: Identifiable, Hashable {
 
     // Edit state
     var currentEditVersion: Int = 0
+    var editState: EditState = EditState()
 
     init(
         id: UUID = UUID(),
@@ -116,6 +117,8 @@ struct ImageMetadata: Hashable {
     var captureDate: Date?
     var width: Int?
     var height: Int?
+    var pixelWidth: Int? { width }  // Alias for StatusBar compatibility
+    var pixelHeight: Int? { height } // Alias for StatusBar compatibility
 
     // Camera info
     var cameraMake: String?
