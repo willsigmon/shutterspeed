@@ -19,6 +19,27 @@
 		B100000A /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100000A /* ThumbnailCache.swift */; };
 		B100000B /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100000B /* EditState.swift */; };
 		B100000C /* LibraryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100000C /* LibraryDocument.swift */; };
+		B1000010 /* ImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000010 /* ImportService.swift */; };
+		B1000011 /* RAWProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000011 /* RAWProcessor.swift */; };
+		B1000012 /* EditEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000012 /* EditEngine.swift */; };
+		B1000013 /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000013 /* ExportService.swift */; };
+		B1000014 /* XMPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000014 /* XMPService.swift */; };
+		B1000015 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000015 /* KeyboardShortcuts.swift */; };
+		B1000020 /* InspectorPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000020 /* InspectorPanel.swift */; };
+		B1000021 /* DetailViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000021 /* DetailViewer.swift */; };
+		B1000022 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000022 /* CompareView.swift */; };
+		B1000023 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000023 /* FilterBar.swift */; };
+		B1000024 /* HistogramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000024 /* HistogramView.swift */; };
+		B1000025 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000025 /* Toolbar.swift */; };
+		B1000026 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000026 /* StatusBar.swift */; };
+		B1000027 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000027 /* SettingsView.swift */; };
+		B1000028 /* CropToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000028 /* CropToolView.swift */; };
+		B1000029 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000029 /* WelcomeView.swift */; };
+		B100002A /* MenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100002A /* MenuCommands.swift */; };
+		B100002B /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100002B /* ContextMenus.swift */; };
+		B1000030 /* ImportDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000030 /* ImportDialog.swift */; };
+		B1000031 /* ExportDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000031 /* ExportDialog.swift */; };
+		B1000032 /* SmartAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000032 /* SmartAlbumDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +58,27 @@
 		C100000C /* LibraryDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDocument.swift; sourceTree = "<group>"; };
 		C100000D /* ShutterSpeed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShutterSpeed.entitlements; sourceTree = "<group>"; };
 		C100000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1000010 /* ImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportService.swift; sourceTree = "<group>"; };
+		C1000011 /* RAWProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAWProcessor.swift; sourceTree = "<group>"; };
+		C1000012 /* EditEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngine.swift; sourceTree = "<group>"; };
+		C1000013 /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportService.swift; sourceTree = "<group>"; };
+		C1000014 /* XMPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPService.swift; sourceTree = "<group>"; };
+		C1000015 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
+		C1000020 /* InspectorPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorPanel.swift; sourceTree = "<group>"; };
+		C1000021 /* DetailViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewer.swift; sourceTree = "<group>"; };
+		C1000022 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
+		C1000023 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
+		C1000024 /* HistogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistogramView.swift; sourceTree = "<group>"; };
+		C1000025 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		C1000026 /* StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
+		C1000027 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C1000028 /* CropToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropToolView.swift; sourceTree = "<group>"; };
+		C1000029 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		C100002A /* MenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommands.swift; sourceTree = "<group>"; };
+		C100002B /* ContextMenus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenus.swift; sourceTree = "<group>"; };
+		C1000030 /* ImportDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDialog.swift; sourceTree = "<group>"; };
+		C1000031 /* ExportDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDialog.swift; sourceTree = "<group>"; };
+		C1000032 /* SmartAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +141,19 @@
 				C1000007 /* LibraryBrowser.swift */,
 				C1000008 /* Sidebar.swift */,
 				C1000009 /* PhotoGrid.swift */,
+				C1000021 /* DetailViewer.swift */,
+				C1000022 /* CompareView.swift */,
+				C1000023 /* FilterBar.swift */,
+				C1000024 /* HistogramView.swift */,
+				C1000025 /* Toolbar.swift */,
+				C1000026 /* StatusBar.swift */,
+				C1000027 /* SettingsView.swift */,
+				C1000028 /* CropToolView.swift */,
+				C1000029 /* WelcomeView.swift */,
+				C100002A /* MenuCommands.swift */,
+				C100002B /* ContextMenus.swift */,
+				E1000008 /* Inspector */,
+				E1000009 /* Dialogs */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,8 +170,32 @@
 			isa = PBXGroup;
 			children = (
 				C100000A /* ThumbnailCache.swift */,
+				C1000010 /* ImportService.swift */,
+				C1000011 /* RAWProcessor.swift */,
+				C1000012 /* EditEngine.swift */,
+				C1000013 /* ExportService.swift */,
+				C1000014 /* XMPService.swift */,
+				C1000015 /* KeyboardShortcuts.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		E1000008 /* Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				C1000020 /* InspectorPanel.swift */,
+			);
+			path = Inspector;
+			sourceTree = "<group>";
+		};
+		E1000009 /* Dialogs */ = {
+			isa = PBXGroup;
+			children = (
+				C1000030 /* ImportDialog.swift */,
+				C1000031 /* ExportDialog.swift */,
+				C1000032 /* SmartAlbumDialog.swift */,
+			);
+			path = Dialogs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +278,27 @@
 				B100000A /* ThumbnailCache.swift in Sources */,
 				B100000B /* EditState.swift in Sources */,
 				B100000C /* LibraryDocument.swift in Sources */,
+				B1000010 /* ImportService.swift in Sources */,
+				B1000011 /* RAWProcessor.swift in Sources */,
+				B1000012 /* EditEngine.swift in Sources */,
+				B1000013 /* ExportService.swift in Sources */,
+				B1000014 /* XMPService.swift in Sources */,
+				B1000015 /* KeyboardShortcuts.swift in Sources */,
+				B1000020 /* InspectorPanel.swift in Sources */,
+				B1000021 /* DetailViewer.swift in Sources */,
+				B1000022 /* CompareView.swift in Sources */,
+				B1000023 /* FilterBar.swift in Sources */,
+				B1000024 /* HistogramView.swift in Sources */,
+				B1000025 /* Toolbar.swift in Sources */,
+				B1000026 /* StatusBar.swift in Sources */,
+				B1000027 /* SettingsView.swift in Sources */,
+				B1000028 /* CropToolView.swift in Sources */,
+				B1000029 /* WelcomeView.swift in Sources */,
+				B100002A /* MenuCommands.swift in Sources */,
+				B100002B /* ContextMenus.swift in Sources */,
+				B1000030 /* ImportDialog.swift in Sources */,
+				B1000031 /* ExportDialog.swift in Sources */,
+				B1000032 /* SmartAlbumDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
