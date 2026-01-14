@@ -188,6 +188,32 @@ final class Database {
         try execute("UPDATE images SET color_label = ? WHERE id = ?", params: [colorLabel.rawValue, imageID.uuidString])
     }
 
+    func updateImage(_ image: PhotoImage) throws {
+        let sql = """
+            UPDATE images SET
+                rating = ?,
+                flag = ?,
+                color_label = ?
+            WHERE id = ?
+        """
+        try execute(sql, params: [
+            image.rating,
+            image.flag.rawValue,
+            image.colorLabel.rawValue,
+            image.id.uuidString
+        ])
+    }
+
+    func deleteImage(id: UUID) throws {
+        // Delete from junction tables first
+        try execute("DELETE FROM image_keywords WHERE image_id = ?", params: [id.uuidString])
+        try execute("DELETE FROM album_images WHERE image_id = ?", params: [id.uuidString])
+        try execute("DELETE FROM edits WHERE image_id = ?", params: [id.uuidString])
+        try execute("DELETE FROM thumbnails WHERE image_id = ?", params: [id.uuidString])
+        // Delete the image itself
+        try execute("DELETE FROM images WHERE id = ?", params: [id.uuidString])
+    }
+
     // MARK: - Keywords
 
     func addKeyword(_ keyword: String, to imageID: UUID) throws {

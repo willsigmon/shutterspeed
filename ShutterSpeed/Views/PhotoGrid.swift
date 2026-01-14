@@ -6,6 +6,8 @@ struct PhotoGrid: View {
     let thumbnailProvider: ThumbnailProvider?
     let gridSize: Double
     var onDoubleClick: ((PhotoImage) -> Void)? = nil
+    var onUpdateImage: ((UUID, (inout PhotoImage) -> Void) -> Void)? = nil
+    var onDeleteImage: ((UUID) -> Void)? = nil
 
     @State private var hoveredID: UUID?
 
@@ -40,7 +42,24 @@ struct PhotoGrid: View {
                         hoveredID = hovering ? image.id : nil
                     }
                     .contextMenu {
-                        PhotoContextMenu(image: image)
+                        PhotoContextMenu(
+                            image: image,
+                            onSetRating: { rating in
+                                onUpdateImage?(image.id) { $0.rating = rating }
+                            },
+                            onSetFlag: { flag in
+                                onUpdateImage?(image.id) { $0.flag = flag }
+                            },
+                            onSetColorLabel: { label in
+                                onUpdateImage?(image.id) { $0.colorLabel = label }
+                            },
+                            onShowInfo: {
+                                // TODO: Show info panel
+                            },
+                            onDelete: {
+                                onDeleteImage?(image.id)
+                            }
+                        )
                     }
                 }
             }
@@ -175,6 +194,11 @@ struct PhotoThumbnail: View {
 
 struct PhotoContextMenu: View {
     let image: PhotoImage
+    var onSetRating: ((Int) -> Void)? = nil
+    var onSetFlag: ((Flag) -> Void)? = nil
+    var onSetColorLabel: ((ColorLabel) -> Void)? = nil
+    var onShowInfo: (() -> Void)? = nil
+    var onDelete: (() -> Void)? = nil
 
     var body: some View {
         Group {
@@ -182,7 +206,7 @@ struct PhotoContextMenu: View {
             Menu("Rating") {
                 ForEach(0...5, id: \.self) { rating in
                     Button {
-                        // TODO: Update rating
+                        onSetRating?(rating)
                     } label: {
                         HStack {
                             if rating == 0 {
@@ -192,6 +216,10 @@ struct PhotoContextMenu: View {
                                     Image(systemName: "star.fill")
                                 }
                             }
+                            if image.rating == rating {
+                                Spacer()
+                                Image(systemName: "checkmark")
+                            }
                         }
                     }
                     .keyboardShortcut(KeyEquivalent(Character("\(rating)")), modifiers: [])
@@ -200,18 +228,42 @@ struct PhotoContextMenu: View {
 
             // Flags
             Menu("Flag") {
-                Button("Pick") {
-                    // TODO: Set flag
+                Button {
+                    onSetFlag?(.pick)
+                } label: {
+                    HStack {
+                        Text("Pick")
+                        if image.flag == .pick {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
                 .keyboardShortcut("p", modifiers: [])
 
-                Button("Reject") {
-                    // TODO: Set flag
+                Button {
+                    onSetFlag?(.reject)
+                } label: {
+                    HStack {
+                        Text("Reject")
+                        if image.flag == .reject {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
                 .keyboardShortcut("x", modifiers: [])
 
-                Button("Remove Flag") {
-                    // TODO: Remove flag
+                Button {
+                    onSetFlag?(.none)
+                } label: {
+                    HStack {
+                        Text("Remove Flag")
+                        if image.flag == .none {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
                 .keyboardShortcut("u", modifiers: [])
             }
@@ -219,8 +271,21 @@ struct PhotoContextMenu: View {
             // Color labels
             Menu("Color Label") {
                 ForEach(ColorLabel.allCases, id: \.self) { label in
-                    Button(label.name) {
-                        // TODO: Set color label
+                    Button {
+                        onSetColorLabel?(label)
+                    } label: {
+                        HStack {
+                            if label != .none {
+                                Circle()
+                                    .fill(label.color)
+                                    .frame(width: 10, height: 10)
+                            }
+                            Text(label.name)
+                            if image.colorLabel == label {
+                                Spacer()
+                                Image(systemName: "checkmark")
+                            }
+                        }
                     }
                 }
             }
@@ -232,14 +297,14 @@ struct PhotoContextMenu: View {
             }
 
             Button("Get Info") {
-                // TODO: Show info panel
+                onShowInfo?()
             }
             .keyboardShortcut("i", modifiers: .command)
 
             Divider()
 
             Button("Delete", role: .destructive) {
-                // TODO: Delete image
+                onDelete?()
             }
             .keyboardShortcut(.delete, modifiers: .command)
         }

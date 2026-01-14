@@ -11,6 +11,10 @@ enum SidebarItem: Hashable {
 struct Sidebar: View {
     @Binding var selectedTab: SidebarItem
     let albums: [Album]
+    var onCreateAlbum: (() -> Void)? = nil
+    var onCreateSmartAlbum: (() -> Void)? = nil
+    var onDeleteAlbum: ((UUID) -> Void)? = nil
+    var onRenameAlbum: ((UUID) -> Void)? = nil
 
     var body: some View {
         List(selection: $selectedTab) {
@@ -32,6 +36,15 @@ struct Sidebar: View {
                 ForEach(regularAlbums) { album in
                     Label(album.name, systemImage: "rectangle.stack")
                         .tag(SidebarItem.album(album.id))
+                        .contextMenu {
+                            Button("Rename...") {
+                                onRenameAlbum?(album.id)
+                            }
+                            Divider()
+                            Button("Delete Album", role: .destructive) {
+                                onDeleteAlbum?(album.id)
+                            }
+                        }
                 }
 
                 if regularAlbums.isEmpty {
@@ -45,6 +58,15 @@ struct Sidebar: View {
                 ForEach(smartAlbums) { album in
                     Label(album.name, systemImage: "gearshape")
                         .tag(SidebarItem.album(album.id))
+                        .contextMenu {
+                            Button("Edit Smart Album...") {
+                                onRenameAlbum?(album.id)
+                            }
+                            Divider()
+                            Button("Delete Smart Album", role: .destructive) {
+                                onDeleteAlbum?(album.id)
+                            }
+                        }
                 }
 
                 if smartAlbums.isEmpty {
@@ -57,11 +79,11 @@ struct Sidebar: View {
         .listStyle(.sidebar)
         .contextMenu {
             Button("New Album...") {
-                // TODO: Create album
+                onCreateAlbum?()
             }
 
             Button("New Smart Album...") {
-                // TODO: Create smart album
+                onCreateSmartAlbum?()
             }
         }
     }

@@ -388,9 +388,9 @@ struct FolderContextMenu: View {
 
 // MARK: - Smart Album Context Menu
 
-/// Context menu for smart albums
+/// Context menu for smart albums (Album with isSmart = true)
 struct SmartAlbumContextMenu: View {
-    let smartAlbum: SmartAlbum
+    let album: Album
     let onEdit: () -> Void
     let onDuplicate: () -> Void
     let onDelete: () -> Void
@@ -642,14 +642,7 @@ struct PresetContextMenu: View {
 
 // MARK: - Supporting Types
 
-/// Placeholder for Album type
-struct Album: Identifiable {
-    let id: UUID
-    var name: String
-    var imageIDs: [UUID]
-}
-
-/// Placeholder for Folder type
+/// Folder type for organizing albums
 struct Folder: Identifiable {
     let id: UUID
     var name: String
@@ -657,14 +650,7 @@ struct Folder: Identifiable {
     var subfolders: [Folder]
 }
 
-/// Placeholder for SmartAlbum type
-struct SmartAlbum: Identifiable {
-    let id: UUID
-    var name: String
-    var rules: [FilterRule]
-}
-
-/// Placeholder for AdjustmentPreset type
+/// AdjustmentPreset type for saved edit settings
 struct AdjustmentPreset: Identifiable {
     let id: UUID
     var name: String

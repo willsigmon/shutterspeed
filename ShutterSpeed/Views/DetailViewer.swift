@@ -4,8 +4,9 @@ import AppKit
 /// Full-screen detail view for single image editing
 struct DetailViewer: View {
     let image: PhotoImage
-    let library: PhotoLibrary
-    @Binding var editState: EditState?
+    let allImages: [PhotoImage]
+    let onNavigate: (PhotoImage) -> Void
+    let onBack: () -> Void
     @Environment(\.dismiss) private var dismiss
 
     @State private var displayImage: NSImage?
@@ -19,6 +20,20 @@ struct DetailViewer: View {
 
     private let editEngine = EditEngine.shared
     private let rawProcessor = RAWProcessor.shared
+
+    private var currentIndex: Int? {
+        allImages.firstIndex(where: { $0.id == image.id })
+    }
+
+    private var hasPrevious: Bool {
+        guard let index = currentIndex else { return false }
+        return index > 0
+    }
+
+    private var hasNext: Bool {
+        guard let index = currentIndex else { return false }
+        return index < allImages.count - 1
+    }
 
     var body: some View {
         ZStack {
@@ -91,7 +106,11 @@ struct DetailViewer: View {
                     showHistogram: $showHistogram,
                     showLoupe: $showLoupe,
                     zoomScale: $zoomScale,
-                    onClose: { dismiss() }
+                    hasPrevious: hasPrevious,
+                    hasNext: hasNext,
+                    onPrevious: navigateToPrevious,
+                    onNext: navigateToNext,
+                    onClose: onBack
                 )
 
                 Spacer()
@@ -116,21 +135,21 @@ struct DetailViewer: View {
         .task {
             await loadImage()
         }
-        .onChange(of: editState) { _, _ in
+        .onChange(of: image.id) { _, _ in
             Task {
                 await loadImage()
             }
         }
         .onKeyPress(.escape) {
-            dismiss()
+            onBack()
             return .handled
         }
         .onKeyPress(.leftArrow) {
-            // TODO: Previous image
+            navigateToPrevious()
             return .handled
         }
         .onKeyPress(.rightArrow) {
-            // TODO: Next image
+            navigateToNext()
             return .handled
         }
     }
@@ -138,12 +157,12 @@ struct DetailViewer: View {
     private func loadImage() async {
         await MainActor.run { isLoading = true }
 
-        let ciImage: CIImage
         do {
-            if showBefore || editState == nil || editState!.adjustments.isEmpty {
+            let ciImage: CIImage
+            if showBefore || image.editState.adjustments.isEmpty {
                 ciImage = try rawProcessor.loadImage(from: image.filePath)
             } else {
-                ciImage = try editEngine.apply(edits: editState!, to: image.filePath)
+                ciImage = try editEngine.apply(edits: image.editState, to: image.filePath)
             }
 
             let nsImage = editEngine.render(ciImage)
@@ -156,6 +175,16 @@ struct DetailViewer: View {
             await MainActor.run { isLoading = false }
         }
     }
+
+    private func navigateToPrevious() {
+        guard hasPrevious, let index = currentIndex else { return }
+        onNavigate(allImages[index - 1])
+    }
+
+    private func navigateToNext() {
+        guard hasNext, let index = currentIndex else { return }
+        onNavigate(allImages[index + 1])
+    }
 }
 
 // MARK: - Detail Toolbar
@@ -166,6 +195,10 @@ struct DetailToolbar: View {
     @Binding var showLoupe: Bool
     @Binding var zoomScale: CGFloat
 
+    let hasPrevious: Bool
+    let hasNext: Bool
+    let onPrevious: () -> Void
+    let onNext: () -> Void
     let onClose: () -> Void
 
     var body: some View {
@@ -177,6 +210,28 @@ struct DetailToolbar: View {
             }
             .buttonStyle(.plain)
             .foregroundStyle(.white)
+
+            // Navigation buttons
+            HStack(spacing: 8) {
+                Button(action: onPrevious) {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.white)
+                .disabled(!hasPrevious)
+                .opacity(hasPrevious ? 1.0 : 0.3)
+
+                Button(action: onNext) {
+                    Image(systemName: "chevron.right")
+                        .font(.title2)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.white)
+                .disabled(!hasNext)
+                .opacity(hasNext ? 1.0 : 0.3)
+            }
+            .padding(.leading, 16)
 
             Spacer()
 
@@ -387,13 +442,15 @@ struct HistogramView: View {
 }
 
 #Preview {
+    let testImage = PhotoImage(
+        id: UUID(),
+        filePath: URL(fileURLWithPath: "/tmp/test.jpg"),
+        fileName: "test.jpg"
+    )
     DetailViewer(
-        image: PhotoImage(
-            id: UUID(),
-            filePath: URL(fileURLWithPath: "/tmp/test.jpg"),
-            fileName: "test.jpg"
-        ),
-        library: PhotoLibrary.preview,
-        editState: .constant(nil)
+        image: testImage,
+        allImages: [testImage],
+        onNavigate: { _ in },
+        onBack: { }
     )
 }

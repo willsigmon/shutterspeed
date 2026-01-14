@@ -37,6 +37,7 @@
 		B1000029 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000029 /* WelcomeView.swift */; };
 		B100002A /* MenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100002A /* MenuCommands.swift */; };
 		B100002B /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100002B /* ContextMenus.swift */; };
+		B100002C /* AlbumDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100002C /* AlbumDialogs.swift */; };
 		B1000030 /* ImportDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000030 /* ImportDialog.swift */; };
 		B1000031 /* ExportDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000031 /* ExportDialog.swift */; };
 		B1000032 /* SmartAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000032 /* SmartAlbumDialog.swift */; };
@@ -76,6 +77,7 @@
 		C1000029 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C100002A /* MenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommands.swift; sourceTree = "<group>"; };
 		C100002B /* ContextMenus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenus.swift; sourceTree = "<group>"; };
+		C100002C /* AlbumDialogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDialogs.swift; sourceTree = "<group>"; };
 		C1000030 /* ImportDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDialog.swift; sourceTree = "<group>"; };
 		C1000031 /* ExportDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDialog.swift; sourceTree = "<group>"; };
 		C1000032 /* SmartAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumDialog.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				C1000030 /* ImportDialog.swift */,
 				C1000031 /* ExportDialog.swift */,
 				C1000032 /* SmartAlbumDialog.swift */,
+				C100002C /* AlbumDialogs.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				B1000029 /* WelcomeView.swift in Sources */,
 				B100002A /* MenuCommands.swift in Sources */,
 				B100002B /* ContextMenus.swift in Sources */,
+				B100002C /* AlbumDialogs.swift in Sources */,
 				B1000030 /* ImportDialog.swift in Sources */,
 				B1000031 /* ExportDialog.swift in Sources */,
 				B1000032 /* SmartAlbumDialog.swift in Sources */,

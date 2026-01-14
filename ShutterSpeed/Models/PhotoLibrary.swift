@@ -136,6 +136,51 @@ final class PhotoLibrary {
         return image
     }
 
+    // MARK: - Image Updates
+
+    func updateImage(id: UUID, update: (inout PhotoImage) -> Void) {
+        if let index = images.firstIndex(where: { $0.id == id }) {
+            update(&images[index])
+            // Persist to database
+            Task {
+                do {
+                    try database.updateImage(images[index])
+                } catch {
+                    print("Failed to update image: \(error)")
+                }
+            }
+        }
+    }
+
+    func deleteImage(id: UUID) {
+        if let index = images.firstIndex(where: { $0.id == id }) {
+            let image = images[index]
+            images.remove(at: index)
+            selectedImageIDs.remove(id)
+
+            // Delete from database and optionally remove files
+            Task {
+                do {
+                    try database.deleteImage(id: id)
+                    // Note: Not deleting the actual file - that could be done with a "move to trash" option
+                } catch {
+                    print("Failed to delete image from database: \(error)")
+                }
+            }
+
+            // Remove from any albums
+            for i in albums.indices {
+                albums[i].imageIDs.removeAll { $0 == id }
+            }
+        }
+    }
+
+    func deleteImages(ids: Set<UUID>) {
+        for id in ids {
+            deleteImage(id: id)
+        }
+    }
+
     // MARK: - Album Management
 
     func loadAlbums() async {

@@ -14,11 +14,27 @@ struct LibraryBrowser: View {
     // Filter state
     @State private var filterCriteria = FilterCriteria()
 
+    // Album dialogs
+    @State private var showNewAlbumDialog = false
+    @State private var showNewSmartAlbumDialog = false
+    @State private var albumToRename: Album?
+
     var body: some View {
         NavigationSplitView {
             Sidebar(
                 selectedTab: $selectedTab,
-                albums: library.albums
+                albums: library.albums,
+                onCreateAlbum: { showNewAlbumDialog = true },
+                onCreateSmartAlbum: { showNewSmartAlbumDialog = true },
+                onDeleteAlbum: { id in
+                    // Delete album from library
+                    if let index = library.albums.firstIndex(where: { $0.id == id }) {
+                        library.albums.remove(at: index)
+                    }
+                },
+                onRenameAlbum: { id in
+                    albumToRename = library.albums.first { $0.id == id }
+                }
             )
             .navigationSplitViewColumnWidth(min: 180, ideal: 220, max: 300)
         } detail: {
@@ -127,6 +143,23 @@ struct LibraryBrowser: View {
                 }
             )
         }
+        .sheet(isPresented: $showNewAlbumDialog) {
+            NewAlbumDialog { name in
+                _ = try? library.createAlbum(name: name)
+            }
+        }
+        .sheet(isPresented: $showNewSmartAlbumDialog) {
+            SmartAlbumDialog { name, criteria in
+                _ = try? library.createAlbum(name: name, isSmart: true, criteria: criteria)
+            }
+        }
+        .sheet(item: $albumToRename) { album in
+            RenameAlbumDialog(originalName: album.name) { newName in
+                if let index = library.albums.firstIndex(where: { $0.id == album.id }) {
+                    library.albums[index].name = newName
+                }
+            }
+        }
     }
 
     // MARK: - Main Content View
@@ -162,6 +195,12 @@ struct LibraryBrowser: View {
                     onDoubleClick: { image in
                         currentImage = image
                         libraryManager.viewMode = .detail
+                    },
+                    onUpdateImage: { id, update in
+                        library.updateImage(id: id, update: update)
+                    },
+                    onDeleteImage: { id in
+                        library.deleteImage(id: id)
                     }
                 )
             }
