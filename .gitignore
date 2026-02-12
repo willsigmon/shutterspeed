@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Xcode
+.build/
+DerivedData/
+xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# Dependencies
+Pods/
+Carthage/
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
